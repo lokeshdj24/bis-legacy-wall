@@ -1,0 +1,18 @@
+{
+  "forties": [
+    { "1940": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1942": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1945": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1949": [{ "image": "image.png", "title": "title", "description": "description" }] }
+  ],
+  "fifties": [
+    { "1950": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1952": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1955": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1959": [{ "image": "image.png", "title": "title", "description": "description" }] }
+  ],
+  "sixties": [
+    { "1960": [{ "image": "image.png", "title": "title", "description": "description" }] },
+    { "1962": [{ "image": "image.png", "title": "title", "description": "description" }] }
+  ]
+}
