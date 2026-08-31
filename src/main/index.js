@@ -25,12 +25,23 @@ function createWindow() {
   })
 
   mainWindow.on('ready-to-show', () => {
+    mainWindow.setFullScreen(true)
     mainWindow.show()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  mainWindow.webContents.on('before-input-event', (_event, input) => {
+    if (
+      input.type === 'keyDown' &&
+      input.code === 'KeyR' &&
+      (input.control || input.meta)
+    ) {
+      mainWindow.webContents.reload()
+    }
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {

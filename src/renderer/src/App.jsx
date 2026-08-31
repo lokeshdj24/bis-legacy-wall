@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+
+const IDLE_TIMEOUT_MS = 10 * 1000
 import Home from './components/Home'
 import CardList from './components/CardList'
 import Gallery from './components/Gallery'
@@ -45,9 +47,35 @@ function App() {
     }
   }, [])
 
-  const handlePageState = (state) => {
+  const handlePageState = useCallback((state) => {
     setPageState(state)
-  }
+    if (state === 'home') {
+      setSelectedCardId(null)
+    }
+  }, [])
+
+  useEffect(() => {
+    let timerId = null
+
+    const goHome = () => {
+      setPageState('home')
+      setSelectedCardId(null)
+    }
+
+    const resetIdleTimer = () => {
+      clearTimeout(timerId)
+      timerId = setTimeout(goHome, IDLE_TIMEOUT_MS)
+    }
+
+    const activityEvents = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'scroll', 'click']
+    activityEvents.forEach((event) => window.addEventListener(event, resetIdleTimer, { passive: true }))
+    resetIdleTimer()
+
+    return () => {
+      clearTimeout(timerId)
+      activityEvents.forEach((event) => window.removeEventListener(event, resetIdleTimer))
+    }
+  }, [])
 
   const openCard = (cardId) => {
     setSelectedCardId(cardId)
